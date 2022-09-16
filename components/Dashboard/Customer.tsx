@@ -1,11 +1,13 @@
 import React from "react";
-import Products from "./Section/Main/Products";
+import Table from "./Section/Main/Table";
+import { useRouter } from "next/router";
 
 const Customer = () => {
+  const {asPath} = useRouter()
   return (
     <>
       <div className="w-[97%] bg-white h-[700px]">
-        <Products />
+        <Table page={asPath === "/products" ? "products" : "order"} />
       </div>
     </>
   )
