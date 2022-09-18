@@ -76,7 +76,7 @@ function Table({page}: PageProps) {
                   <td className="border border-slate-700 p-5">
                     {item.status}
                   </td>
-                  <td className="border border-slate-700 p-5" onClick={() => handleDelete(item.id)}>Delete</td>
+                  <td className="border border-slate-700 p-5 cursor-pointer" onClick={() => handleDelete(item.id)}>Delete</td>
                 </tr>
             );
           }) : null}

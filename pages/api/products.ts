@@ -1,4 +1,4 @@
-import { IProduct } from './../../@types/IProduct';
+import { IProduct } from "./../../@types/IProduct";
 import { products } from "./../../data/products";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -22,17 +22,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   } else if (req.body.type === "DELETE_PRODUCT") {
     const productID = req.body.data;
 
-
     // console.log("rest, ", restProducts);
+
+    
+    // products.filter((item) => item.id === productID);
+    
+    let index = products.findIndex((product) => product.id === productID);
+    products.splice(index, 1);
+
     
 
-    // products.splice(0, products.length)
-
-    // products = [...restProducts]
-
-    res.status(201).json(products.filter((item) => {
-        return item.id !== productID;
-      }));
-
+    res.status(201).json(products);
   }
 }
