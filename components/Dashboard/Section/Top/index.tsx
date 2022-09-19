@@ -1,14 +1,26 @@
 import React, { useState } from 'react'
 import SendEnquiry from '../../../Modal/SendEnquiry';
 import {useRouter} from 'next/router'
+import { useQuery } from 'react-query';
+import { IProduct } from '../../../../@types/IProduct';
 
-function TopSection() {
-
+function TopSection({data}: {data: IProduct}) {
   const {asPath} = useRouter()
+
+  const pid = asPath.slice(10, 15).toString()
+  
   const [click, setClick] = useState<boolean>(false);
 
-  console.log('click ', click);
-  
+  let path: string = '';
+  if(asPath === '/products') {
+    path = 'Products'
+  }
+  else if(asPath === '/order') {
+    path = 'Order'
+  }
+  else if(asPath.includes('/products/')) {
+    path = `Product / ${data?.product}`
+  }
 
   const handleModal = () => {
     setClick(true)
@@ -18,10 +30,10 @@ function TopSection() {
   return (
     <>
     <div className='h-20 flex flex-col justify-evenly p-4'>
-        <div><span className='text-md'>Home / {asPath === "/products" ? "Products" : "Order" }</span></div>
+        <div><span className='text-md'>Home / {path}</span></div>
         <div className='flex justify-between items-center pt-2'>
-            <span className='text-xl font-medium'>{asPath === "/products" ? "Products" : "Order" }</span>
-            <button className='bg-company-color px-4 py-1 rounded-sm text-white' onClick={handleModal}>{asPath === "/products" ? "Send Enquiry" : "New Order" }</button>
+            <span className='text-xl font-medium'>{path}</span>
+            <button className='bg-company-color px-4 py-1 rounded-sm text-white' onClick={handleModal}>{path === "Products" ? "Send Enquiry" : path === "Order" ? "New Order" : path.includes("Product /") && "Create Order" }</button>
         </div>
     </div>
 

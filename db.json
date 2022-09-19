@@ -1,0 +1,33 @@
+{
+  "productsList": [
+    {
+      "id": 32498,
+      "product": "Men's T-shirt",
+      "techPack": "sample1",
+      "quantity": 100,
+      "price": 80000,
+      "leadTime": 40,
+      "status": "RFQ VERIFICATION PENDING"
+    },
+    {
+      "product": "Men's Pant",
+      "techPack": "sample4",
+      "quantity": "100",
+      "price": "100000",
+      "leadTime": "45",
+      "status": "RFQ VERIFICATION PENDING",
+      "id": 32499
+    }
+  ],
+  "orderList": [
+    {
+      "id": 32498,
+      "product": "Men's T-shirt",
+      "techPack": "sample1",
+      "quantity": 100,
+      "price": 80000,
+      "leadTime": 40,
+      "status": "RFQ VERIFICATION PENDING"
+    }
+  ]
+}

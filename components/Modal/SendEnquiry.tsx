@@ -2,10 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
 import { IProduct } from "../../@types/IProduct";
-import {useMutation, useQueryClient, useQuery} from 'react-query'
+import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useAddProduct } from "../../hooks/useAddProduct";
-import { fetchProducts } from "../Dashboard/Section/Main/Table";
-import axios from 'axios';
+import axios from "axios";
 import { type } from "os";
 
 type setValueProps = {
@@ -13,60 +12,59 @@ type setValueProps = {
 };
 
 const addProduct = async (data: IProduct | undefined) => {
+  console.log('data...', data);
   
-  const res: Response = await axios.post('/api/products', {data: data, type: "addProduct"});
+  const res: Response = await axios.post("http://localhost:8000/productsList", {
+    ...data,
+  });
 
   return res;
-}
-
-
-
+};
 
 function SendEnquiry({ setClick }: setValueProps) {
   const queryClient = useQueryClient();
   const { register, handleSubmit } = useForm<IProduct>({
-    mode: 'onChange'
+    mode: "onChange",
   });
 
-
   const { mutate, isLoading } = useMutation(addProduct, {
-    onSuccess: data => {
+    onSuccess: (data) => {
       console.log(data);
-      queryClient.invalidateQueries('customerProducts')
+      queryClient.invalidateQueries("customerProducts");
 
       // const message = "success"
       // alert(message)
-    }
+    },
   });
-  
 
-
-  
   const onSubmit: SubmitHandler<IProduct> = async (data: IProduct) => {
     // const addProductMutation = useAddProduct(data)
-  //   console.log("data", data);
+    //   console.log("data", data);
 
-  //   const res: Response = await fetch('/api/products', {
-  //     method: 'POST',
-  //     body: JSON.stringify({data}),
-  //     headers: {
-  //         'Content-Type': 'application/json',
-  //     }
-  // });
-  // const productData = await res.json();
-  // console.log(productData);
-  
-  mutate(data);
-  
-  setClick(false);
+    //   const res: Response = await fetch('/api/products', {
+    //     method: 'POST',
+    //     body: JSON.stringify({data}),
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     }
+    // });
+    // const productData = await res.json();
+    // console.log(productData);
 
+    let productData = {
+      ...data,
+      // id: Date.now().toString(),
+      status: "RFQ VERIFICATION PENDING",
+    };
+
+    mutate(productData);
+
+    setClick(false);
   };
 
   const handleCancel = () => {
     setClick(false);
   };
-
-
 
   return (
     <div>
@@ -99,7 +97,12 @@ function SendEnquiry({ setClick }: setValueProps) {
                       className="border border-slate-300 w-[300px] p-1 text-lg"
                       {...register("product")}
                     >
-                      <option defaultValue={"Men's T-shirt"} value={"Men's T-shirt"}>T-shirt</option>
+                      <option
+                        defaultValue={"Men's T-shirt"}
+                        value={"Men's T-shirt"}
+                      >
+                        T-shirt
+                      </option>
                       <option value={"Men's Pant"}>Pant</option>
                       <option value={"Men's Cap"}>Cap</option>
                       <option value={"Men's Belt"}>Belt</option>

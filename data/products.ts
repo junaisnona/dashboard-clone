@@ -2,7 +2,7 @@ import { IProduct } from '../@types/IProduct';
 
 export const products: IProduct[] = [
     {
-        id: 2342,
+        id: '2342',
         product: "Men's Jeans",
         techPack: "sample",
         quantity: 50,
@@ -11,7 +11,7 @@ export const products: IProduct[] = [
         status: 'RFQ VERIFICATION PENDING'
     },
     {
-        id: 32498,
+        id: '32498',
         product: "Men's T-shirt",
         techPack: "sample",
         quantity: 100,
