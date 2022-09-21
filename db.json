@@ -1,33 +1,51 @@
 {
-  "productsList": [
+  "productslist": [
     {
-      "id": 32498,
       "product": "Men's T-shirt",
-      "techPack": "sample1",
-      "quantity": 100,
-      "price": 80000,
-      "leadTime": 40,
-      "status": "RFQ VERIFICATION PENDING"
-    },
-    {
-      "product": "Men's Pant",
-      "techPack": "sample4",
+      "techPack": "sample",
       "quantity": "100",
-      "price": "100000",
-      "leadTime": "45",
-      "status": "RFQ VERIFICATION PENDING",
-      "id": 32499
+      "price": "80000",
+      "leadTime": "30",
+      "id": 1,
+      "actions": {
+        "rfq_verification": true,
+        "add_proposal": true,
+        "accept_proposal": true
+      },
+      "proposalLeadTime": "35",
+      "proposalPrice": "100000"
     }
   ],
-  "orderList": [
+  "orderlist": [
     {
-      "id": 32498,
-      "product": "Men's T-shirt",
-      "techPack": "sample1",
-      "quantity": 100,
-      "price": 80000,
-      "leadTime": 40,
-      "status": "RFQ VERIFICATION PENDING"
+      "po": "img",
+      "qty": "33",
+      "address": "demo",
+      "pid": 32500,
+      "product": "Men's Cap",
+      "leadTime": "25",
+      "price": "30000",
+      "quantity": "40",
+      "techPack": "sample",
+      "rfq": false,
+      "proposal": false,
+      "sampling": false,
+      "id": 768499
+    },
+    {
+      "po": "img",
+      "qty": "45",
+      "address": "Gurgaon",
+      "pid": 32500,
+      "product": "Men's Cap",
+      "leadTime": "25",
+      "price": "30000",
+      "quantity": "40",
+      "techPack": "sample",
+      "rfq": false,
+      "proposal": false,
+      "sampling": false,
+      "id": 768500
     }
   ]
 }

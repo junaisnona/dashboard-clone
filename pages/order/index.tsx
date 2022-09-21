@@ -1,6 +1,6 @@
 import React from 'react'
-import TopSection from '../components/Dashboard/Section/Top'
-import MainWrapper from '../components/Wrapper/MainWrapper'
+import TopSection from '../../components/Dashboard/Section/Top'
+import MainWrapper from '../../components/Wrapper/MainWrapper'
 
 function Products() {
   return (

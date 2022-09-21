@@ -1,23 +1,27 @@
 import { useQueryClient, useMutation } from 'react-query';
 import { IProduct } from './../@types/IProduct';
+import axios from 'axios';
 
-const addProduct = async (data: IProduct[] | undefined) => {
-    const res: Response = await fetch('/api/products', {
-        method: 'POST',
-        body: JSON.stringify({data}),
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    });
-}
+const addProduct = async (data: IProduct | undefined) => {
+  
+  await axios.post("http://localhost:8000/productslist", {
+    ...data,
+  });
+
+};
 
 
-export const useAddProduct = (product: IProduct[] | undefined) => {
-    const queryClient = useQueryClient();
-    return useMutation(() => addProduct(product), {
-      onSettled: () => {
-        queryClient.invalidateQueries("customerProducts");
-      },
-    });
+export const useAddProduct = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation(addProduct, {
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries("customerProducts");
+
+      // const message = "success"
+      // alert(message)
+    },
+  });
   };
 

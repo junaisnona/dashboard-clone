@@ -2,62 +2,27 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { SubmitHandler } from "react-hook-form/dist/types";
 import { IProduct } from "../../@types/IProduct";
-import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useAddProduct } from "../../hooks/useAddProduct";
-import axios from "axios";
-import { type } from "os";
 
 type setValueProps = {
   setClick: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const addProduct = async (data: IProduct | undefined) => {
-  console.log('data...', data);
-  
-  const res: Response = await axios.post("http://localhost:8000/productsList", {
-    ...data,
-  });
-
-  return res;
-};
-
 function SendEnquiry({ setClick }: setValueProps) {
-  const queryClient = useQueryClient();
+  const addProductMutation = useAddProduct();
+
   const { register, handleSubmit } = useForm<IProduct>({
     mode: "onChange",
   });
 
-  const { mutate, isLoading } = useMutation(addProduct, {
-    onSuccess: (data) => {
-      console.log(data);
-      queryClient.invalidateQueries("customerProducts");
-
-      // const message = "success"
-      // alert(message)
-    },
-  });
-
   const onSubmit: SubmitHandler<IProduct> = async (data: IProduct) => {
-    // const addProductMutation = useAddProduct(data)
-    //   console.log("data", data);
-
-    //   const res: Response = await fetch('/api/products', {
-    //     method: 'POST',
-    //     body: JSON.stringify({data}),
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     }
-    // });
-    // const productData = await res.json();
-    // console.log(productData);
-
     let productData = {
       ...data,
       // id: Date.now().toString(),
-      status: "RFQ VERIFICATION PENDING",
+      // status: "RFQ VERIFICATION PENDING",
     };
 
-    mutate(productData);
+    addProductMutation.mutate(productData);
 
     setClick(false);
   };
@@ -78,16 +43,6 @@ function SendEnquiry({ setClick }: setValueProps) {
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            {/* <!--
-        Modal panel, show/hide based on modal state.
-
-        Entering: "ease-out duration-300"
-          From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          To: "opacity-100 translate-y-0 sm:scale-100"
-        Leaving: "ease-in duration-200"
-          From: "opacity-100 translate-y-0 sm:scale-100"
-          To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-      --> */}
             <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <form onSubmit={handleSubmit(onSubmit)}>

@@ -4,7 +4,7 @@ import {useRouter} from 'next/router'
 import { useQuery } from 'react-query';
 import { IProduct } from '../../../../@types/IProduct';
 
-function TopSection({data}: {data: IProduct}) {
+function TopSection({data}: {data?: IProduct}) {
   const {asPath} = useRouter()
 
   const pid = asPath.slice(10, 15).toString()
@@ -21,6 +21,9 @@ function TopSection({data}: {data: IProduct}) {
   else if(asPath.includes('/products/')) {
     path = `Product / ${data?.product}`
   }
+  else if(asPath.includes('/order/')) {
+    path = `Order / ${data?.product}`
+  }
 
   const handleModal = () => {
     setClick(true)
@@ -33,7 +36,7 @@ function TopSection({data}: {data: IProduct}) {
         <div><span className='text-md'>Home / {path}</span></div>
         <div className='flex justify-between items-center pt-2'>
             <span className='text-xl font-medium'>{path}</span>
-            <button className='bg-company-color px-4 py-1 rounded-sm text-white' onClick={handleModal}>{path === "Products" ? "Send Enquiry" : path === "Order" ? "New Order" : path.includes("Product /") && "Create Order" }</button>
+            {!path.includes('Order /') && <button className='bg-company-color px-4 py-1 rounded-sm text-white' onClick={handleModal}>{path === "Products" ? "Send Enquiry" : path === "Order" ? "New Order" : path.includes("Product /") && "Create Order" }</button>}
         </div>
     </div>
 

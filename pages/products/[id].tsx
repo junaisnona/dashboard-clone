@@ -8,7 +8,7 @@ import TopSection from '../../components/Dashboard/Section/Top'
 
 const fetchSingleProduct = async (id: string | string[] | undefined) => {
   const res = await axios.get(
-    `http://localhost:8000/productsList/${id?.toString()}`
+    `http://localhost:8000/productslist/${id?.toString()}`
   );
 
   return res?.data;

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
-const deleteProduct = async (id: number) => {
+const deleteProduct = async (id?: number) => {
     const res: Response = await axios.delete(`http://localhost:8000/productsList/${id}`);
   
     return res;
