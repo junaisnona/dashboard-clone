@@ -1,5 +1,4 @@
 import axios from "axios";
-import { IAddProposal } from "../@types/IAddProposal";
 import { useMutation, useQueryClient } from "react-query";
 
 const acceptProposal = async (pid?: number): Promise<any> => {

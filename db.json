@@ -3,17 +3,90 @@
     {
       "product": "Men's T-shirt",
       "techPack": "sample",
-      "quantity": "100",
-      "price": "80000",
-      "leadTime": "30",
-      "id": 1,
+      "quantity": "500",
+      "price": "150000",
+      "leadTime": "25",
+      "id": 304021,
       "actions": {
         "rfq_verification": true,
         "add_proposal": true,
-        "accept_proposal": true
+        "accept_proposal": true,
+        "request_sampling": true,
+        "assign_sampling": true,
+        "accept_sample_request": true,
+        "add_bom": true,
+        "dispatch_sample_to_sales": true,
+        "approve_sample_by_sales": true,
+        "dispatch_sample_to_customer": true,
+        "delivered_sample": true,
+        "approve_sample_by_customer": true
       },
-      "proposalLeadTime": "35",
-      "proposalPrice": "100000"
+      "proposalLeadTime": "30",
+      "proposalPrice": "200000",
+      "customerDetails": {
+        "name": "Junais Babu",
+        "phoneNumber": "9385403668",
+        "shippingAddress": "Gurgaon, Haryana"
+      },
+      "samplingDetails": {
+        "targetDate": "2022-09-22",
+        "teckPack": "Design 100",
+        "Comment": "make it fast on time"
+      },
+      "bom_data": {
+        "fabricDescription": "Cotton",
+        "fabricPrice": "70",
+        "fabricQuantity": "7",
+        "fabricType": "Knit",
+        "trimDescription": "Button",
+        "trimPrice": "8",
+        "trimQuantity": "4",
+        "measureType": "piece"
+      }
+    },
+    {
+      "product": "Men's Pant",
+      "techPack": "sample",
+      "quantity": "100",
+      "price": "200000",
+      "leadTime": "15",
+      "id": 304022,
+      "actions": {
+        "rfq_verification": true,
+        "add_proposal": true,
+        "accept_proposal": true,
+        "request_sampling": true,
+        "assign_sampling": true,
+        "accept_sample_request": true,
+        "add_bom": true,
+        "dispatch_sample_to_sales": true,
+        "approve_sample_by_sales": true,
+        "dispatch_sample_to_customer": true,
+        "delivered_sample": true,
+        "approve_sample_by_customer": true
+      },
+      "proposalLeadTime": "20",
+      "proposalPrice": "220000",
+      "customerDetails": {
+        "name": "Junais",
+        "phoneNumber": "8955895",
+        "shippingAddress": "Gurgaon"
+      },
+      "samplingDetails": {
+        "targetDate": "2022-09-22",
+        "teckPack": "sample",
+        "Comment": "For demo"
+      },
+      "bom_data": {
+        "fabricDescription": "Cotton",
+        "fabricPrice": "200",
+        "fabricQuantity": "20",
+        "fabricType": "Knit",
+        "trimDescription": "Button",
+        "trimPrice": "10",
+        "trimQuantity": "3",
+        "measureType": "piece"
+      }
     }
   ],
   "orderlist": [

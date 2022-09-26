@@ -9,7 +9,10 @@ import { useRouter } from "next/router";
 import VerifyRFQ from "../../../ActionButton/VerifyRFQ";
 import { AcceptProposal, AddProposal } from "../../../ActionButton/Proposal";
 import { status } from "../../../../status/status";
-import { RequestSample } from "../../../ActionButton/Sampling";
+import AcceptSampling, { ApproveSampleCustomer, ApproveSampleSales, AssignSample, RequestSample } from "../../../ActionButton/Sampling";
+import AddBOM from "../../../ActionButton/AddBOM";
+import { DispatchSampleToCustomer, DispatchSampleToSales } from "../../../ActionButton/DispatchSample";
+import { DeliverSample } from "../../../ActionButton/DeliverSample";
 
 export const fetchProducts = async (): Promise<IProduct[] | undefined> => {
   const res: Response = await fetch("http://localhost:8000/productslist");
@@ -47,13 +50,18 @@ export const ProductBody = () => {
         let status_process = "";
         if (!item?.actions?.rfq_verification) {
           status_process = status.RFQ_VERIFICATION_PENDING;
-        } else if (item.actions?.rfq_verification && !item.actions?.add_proposal || item.actions.add_proposal) {
+        } else if (item.actions?.rfq_verification && !item.actions.accept_proposal) {
           status_process = status.PROPOSAL_PENDING;
-        } else if (item.actions.rfq_verification && item.actions.accept_proposal) {
+        } else if (item.actions.rfq_verification && item.actions.accept_proposal && !item.actions.request_sampling) {
           status_process = status.PROPOSAL_ACCEPTED;
-        } else if (item.actions.accept_proposal && !item.actions.request_sampling) {
-          status_process = status.SAMPLING_REQUESTED;
-        } else if (item.actions.approve_sample_by_sampler) {
+        } else if (item.actions.accept_proposal && !item.actions.approve_sample_by_customer) {
+          status_process = status.SAMPLING_REQUESTED; }
+
+        // else if (item.actions.request_sampling) {
+        //   status_process = item.actions.re
+        
+        // } 
+        else if (item.actions?.approve_sample_by_customer) {
           status_process = status.APPROVED;
         }
         return (
@@ -92,15 +100,38 @@ export const ProductBody = () => {
                 <AddProposal pid={item.id} />
               ) : asPath === "/products" && item.actions?.add_proposal && !item.actions.accept_proposal ? (
                 <AcceptProposal pid={item.id} />
-              ) : asPath === "/products" && item.actions?.accept_proposal && (
-                <RequestSample />
-              )} 
-              <span
+              ) : asPath === "/products" && item.actions?.accept_proposal && !item?.actions?.request_sampling ? (
+                <RequestSample pid={item.id} />
+              ) : asPath.includes("/sales/products") && item.actions?.request_sampling && !item.actions.assign_sampling ? (
+                <AssignSample pid={item.id} />
+              ) : asPath.includes("/sampling/products") && item.actions?.assign_sampling && !item.actions.accept_sample_request && !item.actions.decline_sample_request ? (
+                <AcceptSampling pid={item.id} />
+              ) : asPath.includes("/sampling/products") && (item.actions?.accept_sample_request || item.actions?.decline_sample_request) && !item.actions.add_bom ? (
+                <AddBOM pid={item.id} />
+              ) : asPath.includes("/sampling/products") && item.actions?.add_bom && !item.actions.dispatch_sample_to_sales ? (
+                <DispatchSampleToSales pid={item.id} />
+              ) : asPath.includes("/sales/products") && item.actions?.dispatch_sample_to_sales && (!item.actions.approve_sample_by_sales && !item.actions.reject_sample_by_sales) ? 
+              (
+                <ApproveSampleSales pid={item.id} />
+              ) : asPath.includes("/sales/products") && (item.actions?.approve_sample_by_sales || item.actions?.reject_sample_by_sales) && !item.actions.dispatch_sample_to_customer ?
+              (
+                <DispatchSampleToCustomer pid={item.id} />
+              ) : asPath.includes("/sales/products") && item.actions?.dispatch_sample_to_customer && !item.actions.delivered_sample ? (
+                <DeliverSample pid={item.id} />
+              ) : asPath === "/products" && !item.actions?.approve_sample_by_customer && item.actions?.delivered_sample && (
+                <ApproveSampleCustomer pid={item.id} />
+              )
+              
+            
+            } 
+              {/* { !asPath.includes("/sampling/products") && !item.actions?.add_bom && */}
+                <span
                 className="cursor-pointer"
                 onClick={() => handleDelete(item?.id)}
               >
                 Delete
               </span>
+              {/* } */}
             </td>
           </tr>
         );

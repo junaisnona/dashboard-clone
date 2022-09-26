@@ -12,10 +12,10 @@ function TopSection({data}: {data?: IProduct}) {
   const [click, setClick] = useState<boolean>(false);
 
   let path: string = '';
-  if(asPath === '/products') {
+  if(asPath === '/products' || asPath === '/sales/products' || asPath === '/sampling/products') {
     path = 'Products'
   }
-  else if(asPath === '/order') {
+  else if(asPath === '/order' || asPath === '/sales/order' || asPath === '/sampling/order') {
     path = 'Order'
   }
   else if(asPath.includes('/products/')) {

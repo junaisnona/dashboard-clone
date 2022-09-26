@@ -5,6 +5,24 @@ import { useRouter } from "next/router";
 function Sidebar() {
   const { asPath } = useRouter();
 
+  let homeUrl = "/";
+  let productsUrl = "/products";
+  let orderUrl = "/order"
+
+  if (asPath === "/") {
+    homeUrl = "/";
+    productsUrl = "/products"
+    orderUrl = "/order"
+  } else if (asPath.includes("/sales")) {
+    homeUrl = "/sales";
+    productsUrl = "/sales/products";
+    orderUrl = "/sales/order";
+  } else if (asPath.includes("/sampling")) {
+    homeUrl = "/sampling";
+    productsUrl = "/sampling/products";
+    orderUrl = "/sampling/order";
+  }
+
   return (
     <aside className="w-[200px] h-[840px] bg-primary-color float-left">
       <nav className="text-left text-lg text-white">
@@ -15,7 +33,7 @@ function Sidebar() {
               : "pl-10 py-3 bg-transparent"
           }
         >
-          <Link href={"/"}>
+          <Link href={`${homeUrl}`}>
             <span className="cursor-pointer">Home</span>
           </Link>
         </div>
@@ -26,21 +44,23 @@ function Sidebar() {
               : "pl-10 py-3 bg-transparent"
           }
         >
-          <Link href={"/products"}>
+          <Link href={`${productsUrl}`}>
             <span className="cursor-pointer">Products</span>
           </Link>
         </div>
-        <div
-          className={
-            asPath.includes("/order")
-              ? `pl-10 py-3 bg-company-color`
-              : "pl-10 py-3 bg-transparent"
-          }
-        >
-          <Link href={"/order"}>
-            <span className="cursor-pointer">Orders</span>
-          </Link>
-        </div>
+        {asPath !== "/sampling/products" && (
+          <div
+            className={
+              asPath.includes("/order")
+                ? `pl-10 py-3 bg-company-color`
+                : "pl-10 py-3 bg-transparent"
+            }
+          >
+            <Link href={orderUrl}>
+              <span className="cursor-pointer">Orders</span>
+            </Link>
+          </div>
+        )}
       </nav>
     </aside>
   );

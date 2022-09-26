@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import React from 'react'
 import { useQuery } from 'react-query';
 import ProductDetail from '../../components/Dashboard/Section/Table/ProductDetail'
+import ProposalDetail from '../../components/Dashboard/Section/Table/ProposalDetail';
+import SampleDetail from '../../components/Dashboard/Section/Table/SampleDetail';
 import TopSection from '../../components/Dashboard/Section/Top'
 
 const fetchSingleProduct = async (id: string | string[] | undefined) => {
@@ -30,6 +32,8 @@ function ProductId() {
     
     <div className="w-[97%] bg-white h-[700px]">
     <ProductDetail data={data} />
+    <ProposalDetail data={data} />
+    <SampleDetail data={data} />
     </div>
     </div>
     </>
